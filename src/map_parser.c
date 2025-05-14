@@ -16,7 +16,6 @@ int	read_header(int fd, t_map *map)
 {
 	char	buffer[32];
 	int		i;
-	int		ret;
 
 	i = 0;
 	while (i < 31 && (read(fd, &buffer[i], 1) == 1))

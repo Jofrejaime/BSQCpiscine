@@ -20,4 +20,3 @@ int	ft_min(int a, int b, int c)
 		return (b);
 	return (c);
 }
-

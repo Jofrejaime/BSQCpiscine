@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 
 typedef struct t_map
 {
@@ -40,7 +40,7 @@ int			read_header(int fd, t_map *map);
 int			read_grid(int fd, t_map *map);
 
 /* Solvers */
-void	solve_map(t_map *map, t_square *max);
+void		solve_map(t_map *map, t_square *max);
 
 /* Manipulação de entradas */
 void		handle_input(char *filename);
@@ -58,10 +58,12 @@ void		print_map_error(void);
 /* parsers */
 int			parse_map(char *filename, t_map *map);
 int			read_header(int fd, t_map *map);
-int	r		ead_grid(int fd, t_map *map);
+int			read_grid(int fd, t_map *map);
 /*meomoria utils*/
 int			alloc_grid(t_map *map);
 int			read_line_into_grid(int fd, char *line,
 				int *length);
+/* Print */
+void		print_result(t_map *map, t_square *square);
 
 #endif

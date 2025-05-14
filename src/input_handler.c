@@ -14,14 +14,15 @@
 
 void	handle_input(char *filename)
 {
-	t_map	map;
+	t_map		map;
+	t_square	square;
 
 	if (!parse_map(filename, &map))
 		print_map_error();
 	else
 	{
-		// solve_map(&map);
-		// print_result(&map);
+		solve_map(&map, &square);
+		print_result(&map, &square);
 		free_map(&map);
 	}
 }

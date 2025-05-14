@@ -41,19 +41,17 @@ static void	update_max_square(t_square *max, int i, int j, int size)
 	}
 }
 
-static void	free_dp(int ***dp, t_map **map)
+static void	free_dp(int **dp, int rows)
 {
-	i = 0;
-	while (i < map->lines)
-		free(dp[i++]);
-	free(dp);
-}
+	int	i;
 
-static void	create_local_dp(int ***dp, int **map)
-{
-	dp = create_dp_matrix(map->lines, map->cols);
-	if (!dp)
-		return ;
+	i = 0;
+	while (i < rows)
+	{
+		free(dp[i]);
+		i++;
+	}
+	free(dp);
 }
 
 void	solve_map(t_map *map, t_square *max)
@@ -62,7 +60,9 @@ void	solve_map(t_map *map, t_square *max)
 	int	i;
 	int	j;
 
-	create_local_dp(&dp, &map);
+	dp = create_dp_matrix(map->lines, map->cols);
+	if (!dp)
+		return ;
 	max->size = 0;
 	i = -1;
 	while (++i < map->lines)
@@ -75,11 +75,10 @@ void	solve_map(t_map *map, t_square *max)
 			else if (i == 0 || j == 0)
 				dp[i][j] = 1;
 			else
-				dp[i][j] = 1 + ft_min(dp[i - 1][j],
-						dp[i][j - 1],
+				dp[i][j] = 1 + ft_min(dp[i - 1][j], dp[i][j - 1],
 						dp[i - 1][j - 1]);
 			update_max_square(max, i, j, dp[i][j]);
 		}
 	}
-	free_dp(&dp, &map);
+	free_dp(dp, map->lines);
 }
